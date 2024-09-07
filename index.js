@@ -2,12 +2,16 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import userRouter from "./routes/user.js";
-import authRouter from "./routes/auth.js";
-import productRouter from "./routes/product.js"
-import cartRouter from "./routes/cart.js"
-import orderRouter from "./routes/order.js"
+import userRoute from "./routes/user.js";
+import authRoute from "./routes/auth.js";
+import productRoute from "./routes/product.js"
+import cartRoute from "./routes/cart.js"
+import orderRoute from "./routes/order.js"
+import stripeRoute from "./routes/stripe.js"
+import cors from "cors"
 
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -15,7 +19,6 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-dotenv.config();
 
 const connectDB = async () => {
   try {
@@ -28,11 +31,13 @@ const connectDB = async () => {
 
 connectDB();
 
-app.use("/api/auth", authRouter);
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
-app.use("/api/carts", cartRouter);
-app.use("/api/orders", orderRouter);
+app.use(cors())
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/products", productRoute);
+app.use("/api/carts", cartRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/checkout", stripeRoute);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
