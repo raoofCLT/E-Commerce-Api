@@ -7,14 +7,14 @@ import authRoute from "./routes/auth.js";
 import productRoute from "./routes/product.js"
 import cartRoute from "./routes/cart.js"
 import orderRoute from "./routes/order.js"
-import stripeRoute from "./routes/stripe.js"
+import stripeRoute from "./routes/Stripe.js"
 import cors from "cors"
 
 
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
