@@ -9,10 +9,10 @@ const router = Router();
 router.post("/",verifyToken, async(req,res)=>{
     const newCart = new Cart(req.body)
     try{
-        const savedCart = await newCart.save()
-        res.status(200).send(savedCart)
+        const savedCart = await newCart.save();
+        res.status(200).send(savedCart);
     }catch(err){
-        res.status(500).send(err)
+        res.status(500).send(err);
     }
 })
 
@@ -65,9 +65,9 @@ router.get("/find/:userId", verifyTokenAndAuthorization,async (req, res) => {
 router.get("/", verifyTokenAndAdmin,async (req, res) => {
     try{
         const carts = await Cart.find()
-        res.status(200).send(carts)
+        res.status(200).send(carts);
     }catch(err){
-        res.status(500).send(err)
+        res.status(500).send(err);
     }
 
 })
